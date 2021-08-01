@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   ToastAndroid,
+  Button,
 } from 'react-native';
 import MapView from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
@@ -40,6 +41,7 @@ export default class UberMarker extends Component {
       locationChosen: false,
       marginBottom: 1,
       currentAddress: '',
+      mapType: 'standard',
     };
   }
 
@@ -163,6 +165,8 @@ export default class UberMarker extends Component {
             showsMyLocationButton={true}
             showsPointsOfInterest={true}
             showsUserLocation={true}
+            ///maptype for sattelight
+            mapType={this.state.mapType}
             followsUserLocation={true}
             initialRegion={this.state.initialRegion}
             onRegionChangeComplete={this.onChanValue}
@@ -180,6 +184,17 @@ export default class UberMarker extends Component {
             }}>
             <Image style={{height: 48, width: 48}} source={markerImg} />
           </View>
+        </View>
+        <View>
+          <Button
+            title="Satellite"
+            onPress={() => this.setState({mapType: 'satellite'})}
+          />
+
+          <Button
+            title="Hybrid"
+            onPress={() => this.setState({mapType: 'standard'})}
+          />
         </View>
       </View>
     );
