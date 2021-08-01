@@ -47,9 +47,18 @@ const EmptyScreen = ({navigation}) => {
         <TouchableOpacity onPress={() => navigation.navigate('Camera2')}>
           <Text style={styles.txtColor}>Camera2</Text>
         </TouchableOpacity>
-
         <TouchableOpacity onPress={() => navigation.navigate('UberMarker')}>
           <Text style={styles.txtColor}>UberMarker</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('LocationCircule')}>
+          <Text style={styles.txtColor}>LocationCircule</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('PoliGonScreen')}>
+          <Text style={styles.txtColor}>PoliGonScreen</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('CircleScreen')}>
+          <Text style={styles.txtColor}>CircleScreen</Text>
         </TouchableOpacity>
       </View>
     </View>

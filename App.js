@@ -44,6 +44,9 @@ import GmapsDirections from './src/components/GmapsDirections';
 import CameraScreen from './src/components/CameraScreen';
 import Camera2 from './src/components/Camera2';
 import UberMarker from './src/components/UberMarker';
+import LocationCircule from './src/components/LocationCircule';
+import PoliGonScreen from './src/components/PoliGonScreen';
+import CircleScreen from './src/components/CircleScreen';
 
 const Stack = createStackNavigator();
 
@@ -69,6 +72,9 @@ const App = () => {
         <Stack.Screen name="CameraScreen" component={CameraScreen} />
         <Stack.Screen name="Camera2" component={Camera2} />
         <Stack.Screen name="UberMarker" component={UberMarker} />
+        <Stack.Screen name="LocationCircule" component={LocationCircule} />
+        <Stack.Screen name="PoliGonScreen" component={PoliGonScreen} />
+        <Stack.Screen name="CircleScreen" component={CircleScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
