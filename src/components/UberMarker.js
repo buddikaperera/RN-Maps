@@ -52,6 +52,9 @@ export default class UberMarker extends Component {
 
       /// alert(addr);
       this.setState({currentAddress: addr});
+      {
+        this.mark.showCallout();
+      }
     } catch (error) {
       alert(error);
     }
@@ -130,17 +133,42 @@ export default class UberMarker extends Component {
   };
 
   render() {
+    let marker = (
+      <View
+        style={{
+          top: '50%',
+          left: '50%',
+          marginLeft: -24,
+          marginTop: -48,
+          position: 'absolute',
+        }}>
+        <MapView.Marker
+          style={{height: 48, width: 48}}
+          coordinate={this.state.initialRegion}
+          draggable
+          title={this.state.currentAddress}
+          ref={ref => (this.mark = ref)}>
+          <Image style={{height: 48, width: 48}} source={markerImg} />
+        </MapView.Marker>
+      </View>
+    );
+
+    console.disableYellowBox = true;
+
     return (
       <View style={{flex: 1}}>
         <View style={{flex: 1}}>
           <MapView
             style={{flex: 1, marginBottom: this.state.marginBottom}}
-            showsUserLocation={true}
             showsMyLocationButton={true}
+            showsPointsOfInterest={true}
+            showsUserLocation={true}
+            followsUserLocation={true}
             initialRegion={this.state.initialRegion}
             onRegionChangeComplete={this.onChanValue}
-            ref={ref => (this.map = ref)}
-          />
+            ref={ref => (this.map = ref)}>
+            {marker}
+          </MapView>
 
           <View
             style={{
