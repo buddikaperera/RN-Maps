@@ -32,9 +32,24 @@ const EmptyScreen = ({navigation}) => {
           onPress={() => navigation.navigate('DirectionExample')}>
           <Text style={styles.txtColor}>DirectionExample</Text>
         </TouchableOpacity>
-
         <TouchableOpacity onPress={() => navigation.navigate('LEnabler')}>
           <Text style={styles.txtColor}>LEnabler</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('LocationScreen')}>
+          <Text style={styles.txtColor}>LocationScreen</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('mapsDirections')}>
+          <Text style={styles.txtColor}>Map Directions</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('CameraScreen')}>
+          <Text style={styles.txtColor}>CameraScreen</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Camera2')}>
+          <Text style={styles.txtColor}>Camera2</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('UberMarker')}>
+          <Text style={styles.txtColor}>UberMarker</Text>
         </TouchableOpacity>
       </View>
     </View>

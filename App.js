@@ -39,6 +39,12 @@ import M2 from './src/components/M2';
 import M3 from './src/components/M3';
 import DirectionExample from './src/components/DirectionExample';
 import LEnabler from './src/components/LEnabler';
+import SelectLocationScreen from './src/components/SelectLocationScreen';
+import GmapsDirections from './src/components/GmapsDirections';
+import CameraScreen from './src/components/CameraScreen';
+import Camera2 from './src/components/Camera2';
+import UberMarker from './src/components/UberMarker';
+
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -58,6 +64,11 @@ const App = () => {
         <Stack.Screen name="M3" component={M3} />
         <Stack.Screen name="DirectionExample" component={DirectionExample} />
         <Stack.Screen name="LEnabler" component={LEnabler} />
+        <Stack.Screen name="LocationScreen" component={SelectLocationScreen} />
+        <Stack.Screen name="mapsDirections" component={GmapsDirections} />
+        <Stack.Screen name="CameraScreen" component={CameraScreen} />
+        <Stack.Screen name="Camera2" component={Camera2} />
+        <Stack.Screen name="UberMarker" component={UberMarker} />
       </Stack.Navigator>
     </NavigationContainer>
   );
