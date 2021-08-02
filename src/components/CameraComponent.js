@@ -325,7 +325,7 @@ export const dirHome = Platform.select({
 export const dirPicutures = `${dirHome}/Pictures`;
 export const dirAudio = `${dirHome}/Audio`;
 const pathToWrite =
-  'file:///storage/emulated/0/Android/data/com.taxiapp/files/';
+  'file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/';
 const moveAttachment = async (filePath, newFilepath) => {
   return new Promise((resolve, reject) => {
     RNFS.mkdir(dirPicutures)
@@ -337,6 +337,19 @@ const moveAttachment = async (filePath, newFilepath) => {
       .catch(err => reject(err));
   });
 };
+
+const moveAttachmentToFolder = async (filePath, newFilepath, folder) => {
+  return new Promise((resolve, reject) => {
+    RNFS.mkdir(`${pathToWrite}/${folder}`) //folder
+      .then(() => {
+        RNFS.moveFile(filePath, newFilepath)
+          .then(() => resolve(true))
+          .catch(error => reject(error));
+      })
+      .catch(err => reject(err));
+  });
+};
+
 export const deleteFile = targetName => {
   RNFS.unlink(`${ExternalDirectoryPath}/${targetName}`).then(result => {
     console.log(result, 'successfully deleted!!');
@@ -414,22 +427,30 @@ export default class CameraComponent extends React.Component {
   }
 
   // ************************** Captur and Save Image *************************
-  saveImage = async filePath => {
+  saveImage = async (filePath, folder) => {
     try {
       // set new image name and filepath
       const newImageName = `${moment().format('DD-MM-YY-HHmmSSS')}.jpg`;
       console.log('******newImageName**********', newImageName);
       //  const newFilepath = `${dirPicutures}/${newImageName}`;
-      const newFilepath = `${pathToWrite}/${newImageName}`;
+      const newFilepath = `${pathToWrite}${folder}/${newImageName}`;
       // move and save image to new filepath
-      const imageMoved = await moveAttachment(filePath, newFilepath);
+      //const imageMoved = await moveAttachment(filePath, newFilepath);
+      const imageMoved = await moveAttachmentToFolder(
+        filePath,
+        newFilepath,
+        folder,
+      );
+
       console.log('image moved------>', imageMoved);
+      console.log('filePath', filePath);
+      console.log('newFilepath', newFilepath);
     } catch (error) {
       console.log(error);
     }
   };
 
-  takePicture = async () => {
+  takePicture = async folder => {
     if (this.camera) {
       const options = {quality: 0.5, base64: true}; //, skipProcessing: true};
       const data = await this.camera.takePictureAsync(options);
@@ -441,7 +462,7 @@ export default class CameraComponent extends React.Component {
       //console.log('path', path);
       console.log('data path >>>>', data.uri);
 
-      this.saveImage(data.uri);
+      this.saveImage(data.uri, 'JB001');
 
       // try {
       //   RNFetchBlob.fs.writeFile(path, data.base64, 'base64');
