@@ -60,6 +60,10 @@ const EmptyScreen = ({navigation}) => {
         <TouchableOpacity onPress={() => navigation.navigate('CircleScreen')}>
           <Text style={styles.txtColor}>CircleScreen</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('CameraComponent')}>
+          <Text style={styles.txtColor}>CameraComponent</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

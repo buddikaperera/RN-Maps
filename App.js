@@ -47,6 +47,7 @@ import UberMarker from './src/components/UberMarker';
 import LocationCircule from './src/components/LocationCircule';
 import PoliGonScreen from './src/components/PoliGonScreen';
 import CircleScreen from './src/components/CircleScreen';
+import CameraComponent from './src/components/CameraComponent';
 
 const Stack = createStackNavigator();
 
@@ -75,6 +76,7 @@ const App = () => {
         <Stack.Screen name="LocationCircule" component={LocationCircule} />
         <Stack.Screen name="PoliGonScreen" component={PoliGonScreen} />
         <Stack.Screen name="CircleScreen" component={CircleScreen} />
+        <Stack.Screen name="CameraComponent" component={CameraComponent} />
       </Stack.Navigator>
     </NavigationContainer>
   );

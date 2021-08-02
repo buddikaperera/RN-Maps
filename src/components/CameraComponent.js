@@ -301,84 +301,179 @@
 //   },
 // });
 
-import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import React, {Component} from 'react';
+import {
+  View,
+  Text,
+  Platform,
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  PermissionsAndroid,
+} from 'react-native';
 import {RNCamera} from 'react-native-camera';
+import {RNFetchBlob} from 'rn-fetch-blob';
+const RNFS = require('react-native-fs');
 
-export default class Camera2 extends React.Component {
+export const dirHome = Platform.select({
+  /// ios: `${RNFS.DocumentDirectoryPath}/myAppName`,
+  android: `${RNFS.ExternalStorageDirectoryPath}/myAppName`,
+});
+///https://dev-yakuza.posstree.com/en/react-native/react-native-fs/
+// file:///data/user/0/com.taxiapp/cache/Camera/50dadffb-9251-4efd-8b21-f49936838886.jpg
+export const dirPicutures = `${dirHome}/Pictures`;
+export const dirAudio = `${dirHome}/Audio`;
+const pathToWrite =
+  'file:///storage/emulated/0/Android/data/com.taxiapp/files/';
+const moveAttachment = async (filePath, newFilepath) => {
+  return new Promise((resolve, reject) => {
+    RNFS.mkdir(dirPicutures)
+      .then(() => {
+        RNFS.moveFile(filePath, newFilepath)
+          .then(() => resolve(true))
+          .catch(error => reject(error));
+      })
+      .catch(err => reject(err));
+  });
+};
+export const deleteFile = targetName => {
+  RNFS.unlink(`${ExternalDirectoryPath}/${targetName}`).then(result => {
+    console.log(result, 'successfully deleted!!');
+  });
+};
 
+export const downloadFile = (formUrl, targetName) => {
+  // Get the local save path of the download file
+  const toLoadPath = `${ExternalDirectoryPath}/${targetName}`;
+  RNFS.downloadFile({
+    fromUrl: formUrl,
+    toFile: toLoadPath,
+    progressDivider: 5,
+    begin: res => {
+      console.log('begin', res);
+    },
+    progress: res => {
+      console.log('progress', res);
+    },
+  })
+    .promise.then(res => {
+      console.log(res, 'download successful!!');
+    })
+    .catch(err => {
+      console.log(err, 'download failed!!');
+    });
+};
 
+export const writeFile = (content, unicode = 'utf8', targetName) => {
+  const path = `${ExternalDirectoryPath}/${targetName}`;
+  RNFS.writeFile(path, content, unicode).then(result => {
+    console.log(result, 'Write local file successfully!!');
+  });
+};
 
+export const readFile = (fileName, callback) => {
+  RNFS.readFile(`${ExternalDirectoryPath}/${fileName}`).then(result => {
+    callback(result);
+  });
+};
+async function checkAndroidPermission() {
+  try {
+    const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
+    await PermissionsAndroid.request(permission);
+    Promise.resolve();
+  } catch (error) {
+    Promise.reject(error);
+  }
+}
 
-  
-  takePicture = async () => {
-    if (cameraRef.current) {
-      // const options = {quality: 0.5, base64: true, skipProcessing: true};
-      // const data = await cameraRef.current.takePictureAsync(options);
-      // const source = data.uri;
-      // if (source) {
-      //   await cameraRef.current.pausePreview();
-      //   setIsPreview(true);
-      //   console.log('picture source', source);
-      // }
+///https://medium.com/geekculture/capturing-images-with-react-native-203e24f93eb9
+const moment = require('moment');
 
-      if (Platform.OS === 'android') {
-        await this.checkAndroidPermission();
-      }
-      const options = {quality: 1};
-      const data = await this.camera.takePictureAsync(options);
-      //save photo
-      // CameraRoll.save(data.uri, 'photo')
-      //   .then(onfulfilled => {
-      //     ToastAndroid.show(
-      //       `VidApp Photos: ${onfulfilled}`,
-      //       ToastAndroid.SHORT,
-      //     );
-      //   })
-      //   .catch(error => {
-      //     ToastAndroid.show(`${error.message}`, ToastAndroid.SHORT);
-      //   });
-
-      CameraRoll.save(data.uri, {type: 'photo', album: 'CustomFolder'});
-    }
-  };
-
-  state = {};
+export default class CameraComponent extends React.Component {
   render() {
     return (
-      <View
-        style={{
-          width: '100%',
-          height: '100%',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-        }}>
+      <View style={styles.container}>
         <RNCamera
           ref={ref => {
             this.camera = ref;
           }}
-          style={{width: '100%', height: '100%', position: 'absolute'}}
+          style={styles.preview}
           type={RNCamera.Constants.Type.back}
-        />
-        <Image
-          style={{width: 100, height: 100}}
-          source={{uri: this.state.imageUri}}
-        />
-        <TouchableOpacity
-          style={{
-            width: 100,
-            height: 100,
-            backgroundColor: 'blue',
-            borderRadius: 100,
-          }}
-          onPress={async () => {
-            // take picture
-            //const result = await this.camera.takePictureAsync();
-            await this.camera.takePicture();
-            //this.setState({imageUri: result.uri});
-          }}
-        />
+          flashMode={RNCamera.Constants.FlashMode.off}></RNCamera>
+
+        <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center'}}>
+          <TouchableOpacity
+            onPress={this.takePicture.bind(this)}
+            style={styles.capture}>
+            <Text style={{fontSize: 14}}>SNAP</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
+
+  // ************************** Captur and Save Image *************************
+  saveImage = async filePath => {
+    try {
+      // set new image name and filepath
+      const newImageName = `${moment().format('DD-MM-YY-HHmmSSS')}.jpg`;
+      console.log('******newImageName**********', newImageName);
+      //  const newFilepath = `${dirPicutures}/${newImageName}`;
+      const newFilepath = `${pathToWrite}/${newImageName}`;
+      // move and save image to new filepath
+      const imageMoved = await moveAttachment(filePath, newFilepath);
+      console.log('image moved------>', imageMoved);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  takePicture = async () => {
+    if (this.camera) {
+      const options = {quality: 0.5, base64: true}; //, skipProcessing: true};
+      const data = await this.camera.takePictureAsync(options);
+
+      console.log('data', data.base64);
+      //checkAndroidPermission();
+
+      // const path = `${RNFetchBlob.fs.dirs.CacheDir}/test.png`;
+      //console.log('path', path);
+      console.log('data path >>>>', data.uri);
+
+      this.saveImage(data.uri);
+
+      // try {
+      //   RNFetchBlob.fs.writeFile(path, data.base64, 'base64');
+      // } catch (error) {
+      //   console.log(error.message);
+      // }
+    }
+  };
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: 'black',
+  },
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  capture: {
+    flex: 0,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    padding: 15,
+    paddingHorizontal: 20,
+    alignSelf: 'center',
+    margin: 20,
+  },
+  mapStyle: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+  },
+});
