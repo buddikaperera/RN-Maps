@@ -50,6 +50,7 @@ import CircleScreen from './src/components/CircleScreen';
 import CameraComponent from './src/components/CameraComponent';
 import RNCamera from './src/components/RNCamera';
 import ImageGallery from './src/components/ImageGallery';
+import Gallery from './src/components/Gallery';
 
 const Stack = createStackNavigator();
 
@@ -81,6 +82,7 @@ const App = () => {
         <Stack.Screen name="CameraComponent" component={CameraComponent} />
         <Stack.Screen name="RNCamera" component={RNCamera} />
         <Stack.Screen name="ImgGallery" component={ImageGallery} />
+        <Stack.Screen name="Gallery" component={Gallery} />
       </Stack.Navigator>
     </NavigationContainer>
   );

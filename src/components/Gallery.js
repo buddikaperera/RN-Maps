@@ -9,6 +9,8 @@ import {
   TouchableOpacity,
   FlatList,
   Modal,
+  ScrollView,
+  Image,
 } from 'react-native';
 import * as RNFS from 'react-native-fs';
 //import FastImage
@@ -42,69 +44,35 @@ const Gallery = () => {
     RNFS.readDir(
       `${RNFS.ExternalStorageDirectoryPath}/Android/data/com.taxiapp/files/IMAGES/JB001/`,
     ).then(res => {
-      console.log(res);
+      // console.log(res);
       setShowImages(res);
     });
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      {modalVisibleStatus ? (
-        <Modal
-          transparent={false}
-          animationType={'fade'}
-          visible={modalVisibleStatus}
-          onRequestClose={() => {
-            showModalFunction(!modalVisibleStatus, '');
-          }}>
-          <View style={styles.modelStyle}>
-            <FastImage
-              style={styles.fullImageStyle}
-              source={{uri: imageuri}}
-              resizeMode={FastImage.resizeMode.contain}
-            />
-            <TouchableOpacity
-              activeOpacity={0.5}
-              style={styles.closeButtonStyle}
-              onPress={() => {
-                showModalFunction(!modalVisibleStatus, '');
-              }}>
-              <FastImage
-                source={{
-                  uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/close.png',
-                }}
-                style={{width: 35, height: 35}}
-              />
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      ) : (
-        <View style={styles.container}>
-          <FlatList
-            data={dataSource}
-            renderItem={({item}) => (
-              <View style={styles.imageContainerStyle}>
-                <TouchableOpacity
-                  key={item.id}
-                  style={{flex: 1}}
-                  onPress={() => {
-                    showModalFunction(true, item.src);
-                  }}>
+      <View>
+        {
+          <ScrollView>
+            {showImages.map(data => {
+              let paths = {
+                link: 'file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/03-08-21-1618510.jpg',
+              };
+
+              return (
+                <Text key={data.name}>
                   <FastImage
-                    style={styles.imageStyle}
                     source={{
-                      uri: item.src,
+                      uri: `file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/${data.name}`,
                     }}
+                    style={{width: 245, height: 245}}
                   />
-                </TouchableOpacity>
-              </View>
-            )}
-            //Setting the number of column
-            numColumns={3}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </View>
-      )}
+                </Text>
+              );
+            })}
+          </ScrollView>
+        }
+      </View>
     </SafeAreaView>
   );
 };

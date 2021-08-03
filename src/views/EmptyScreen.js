@@ -70,6 +70,9 @@ const EmptyScreen = ({navigation}) => {
         <TouchableOpacity onPress={() => navigation.navigate('ImgGallery')}>
           <Text style={styles.txtColor}>ImgGallery</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Gallery')}>
+          <Text style={styles.txtColor}>Gallery</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
