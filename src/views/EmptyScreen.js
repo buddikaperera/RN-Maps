@@ -64,6 +64,12 @@ const EmptyScreen = ({navigation}) => {
           onPress={() => navigation.navigate('CameraComponent')}>
           <Text style={styles.txtColor}>CameraComponent</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('RNCamera')}>
+          <Text style={styles.txtColor}>RNCamera</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('ImgGallery')}>
+          <Text style={styles.txtColor}>ImgGallery</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

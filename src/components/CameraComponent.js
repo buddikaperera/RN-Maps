@@ -314,6 +314,8 @@ import {
 } from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import {RNFetchBlob} from 'rn-fetch-blob';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 const RNFS = require('react-native-fs');
 
 export const dirHome = Platform.select({
@@ -413,13 +415,24 @@ export default class CameraComponent extends React.Component {
           }}
           style={styles.preview}
           type={RNCamera.Constants.Type.back}
+          playSoundOnCapture={true}
           flashMode={RNCamera.Constants.FlashMode.off}></RNCamera>
 
         <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center'}}>
-          <TouchableOpacity
+          {/*<TouchableOpacity
             onPress={this.takePicture.bind(this)}
             style={styles.capture}>
             <Text style={{fontSize: 14}}>SNAP</Text>
+         </TouchableOpacity>*/}
+
+          <TouchableOpacity style={styles.capture} onPress={() => this.back()}>
+            <Icon name="expand-more" size={30} />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.captureIcon}
+            onPress={this.takePicture.bind(this)}>
+            <Icon name="camera-alt" size={33} style={{color: 'white'}} />
           </TouchableOpacity>
         </View>
       </View>
@@ -481,9 +494,24 @@ const styles = StyleSheet.create({
   },
   preview: {
     flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
   },
+
+  captureIcon: {
+    flex: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    borderRadius: 25,
+    margin: 20,
+    marginBottom: 30,
+    width: 50,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 1,
+  },
+
   capture: {
     flex: 0,
     backgroundColor: '#fff',

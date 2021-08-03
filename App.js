@@ -48,6 +48,8 @@ import LocationCircule from './src/components/LocationCircule';
 import PoliGonScreen from './src/components/PoliGonScreen';
 import CircleScreen from './src/components/CircleScreen';
 import CameraComponent from './src/components/CameraComponent';
+import RNCamera from './src/components/RNCamera';
+import ImageGallery from './src/components/ImageGallery';
 
 const Stack = createStackNavigator();
 
@@ -77,6 +79,8 @@ const App = () => {
         <Stack.Screen name="PoliGonScreen" component={PoliGonScreen} />
         <Stack.Screen name="CircleScreen" component={CircleScreen} />
         <Stack.Screen name="CameraComponent" component={CameraComponent} />
+        <Stack.Screen name="RNCamera" component={RNCamera} />
+        <Stack.Screen name="ImgGallery" component={ImageGallery} />
       </Stack.Navigator>
     </NavigationContainer>
   );
