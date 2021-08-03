@@ -49,30 +49,95 @@ const Gallery = () => {
     });
   };
 
+  //   return (
+  //     <SafeAreaView style={styles.container}>
+  //       <View>
+  //         {
+  //           <ScrollView>
+  //             {showImages.map(data => {
+  //               let paths = {
+  //                 link: 'file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/03-08-21-1618510.jpg',
+  //               };
+
+  //               return (
+  //                 <Text key={data.name}>
+  //                   <FastImage
+  //                     source={{
+  //                       uri: `file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/${data.name}`,
+  //                     }}
+  //                     style={{width: 150, height: 150}}
+  //                   />
+  //                 </Text>
+  //               );
+  //             })}
+  //           </ScrollView>
+  //         }
+  //       </View>
+  //     </SafeAreaView>
+  //   );
+  // };
+
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        {
-          <ScrollView>
-            {showImages.map(data => {
-              let paths = {
-                link: 'file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/03-08-21-1618510.jpg',
-              };
-
-              return (
-                <Text key={data.name}>
+      {modalVisibleStatus ? (
+        <Modal
+          transparent={false}
+          animationType={'fade'}
+          visible={modalVisibleStatus}
+          onRequestClose={() => {
+            showModalFunction(!modalVisibleStatus, '');
+          }}>
+          <View style={styles.modelStyle}>
+            <FastImage
+              style={styles.fullImageStyle}
+              source={{uri: imageuri}}
+              resizeMode={FastImage.resizeMode.contain}
+            />
+            <TouchableOpacity
+              activeOpacity={0.5}
+              style={styles.closeButtonStyle}
+              onPress={() => {
+                showModalFunction(!modalVisibleStatus, '');
+              }}>
+              <FastImage
+                source={{
+                  uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/close.png',
+                }}
+                style={{width: 35, height: 35}}
+              />
+            </TouchableOpacity>
+          </View>
+        </Modal>
+      ) : (
+        <View style={styles.container}>
+          <FlatList
+            data={showImages}
+            renderItem={({item}) => (
+              <View style={styles.imageContainerStyle}>
+                <TouchableOpacity
+                  key={item.name}
+                  style={{flex: 1}}
+                  onPress={() => {
+                    showModalFunction(
+                      true,
+                      `file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/${item.name}`,
+                    );
+                  }}>
                   <FastImage
+                    style={styles.imageStyle}
                     source={{
-                      uri: `file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/${data.name}`,
+                      uri: `file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/${item.name}`,
                     }}
-                    style={{width: 245, height: 245}}
                   />
-                </Text>
-              );
-            })}
-          </ScrollView>
-        }
-      </View>
+                </TouchableOpacity>
+              </View>
+            )}
+            //Setting the number of column
+            numColumns={3}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </View>
+      )}
     </SafeAreaView>
   );
 };
