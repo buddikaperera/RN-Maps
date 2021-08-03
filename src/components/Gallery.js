@@ -11,6 +11,7 @@ import {
   Modal,
   ScrollView,
   Image,
+  Dimensions,
 } from 'react-native';
 import * as RNFS from 'react-native-fs';
 //import FastImage
@@ -113,7 +114,13 @@ const Gallery = () => {
           <FlatList
             data={showImages}
             renderItem={({item}) => (
-              <View style={styles.imageContainerStyle}>
+              <View
+                style={{
+                  width: (Dimensions.get('window').width - 32) / 3,
+                  height: (Dimensions.get('window').width - 32) / 3,
+                  maxWidth: Dimensions.get('window').width / 2,
+                  justifyContent: 'center',
+                }}>
                 <TouchableOpacity
                   key={item.name}
                   style={{flex: 1}}
@@ -134,7 +141,11 @@ const Gallery = () => {
             )}
             //Setting the number of column
             numColumns={3}
-            keyExtractor={(item, index) => index.toString()}
+            contentContainerStyle={{margin: 2}}
+            style={{borderWidth: 0}}
+            horizontal={false}
+            keyExtractor={item => item.findIndex}
+            //keyExtractor={(item, index) => index.toString()}
           />
         </View>
       )}
@@ -158,10 +169,29 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     margin: 1,
+    height: 125,
+    width: 125,
   },
   imageStyle: {
-    height: 120,
-    width: '100%',
+    // height: 120,
+    // width: '100%',
+    // flex: 1,
+    // justifyContent: 'space-between',
+    // alignItems: 'center',
+    width: (Dimensions.get('window').width - (30 + 2 * 3)) / 3,
+    height: (Dimensions.get('window').width - (30 + 2 * 3)) / 3,
+    justifyContent: 'center',
+  },
+  listItem: {
+    maxWidth: Dimensions.get('window').width / 2,
+    flex: 0.5,
+    backgroundColor: '#fff',
+    marginBottom: 10,
+    borderRadius: 4,
+    marginTop: 18,
+    marginBottom: 18,
+    marginRight: 18,
+    marginLeft: 18,
   },
   fullImageStyle: {
     justifyContent: 'center',
