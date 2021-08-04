@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 
-// import all the components we are going to use
 import {
   SafeAreaView,
   StyleSheet,
@@ -16,6 +15,7 @@ import {
 import * as RNFS from 'react-native-fs';
 //import FastImage
 import FastImage from 'react-native-fast-image';
+import * as Animatable from 'react-native-animatable';
 
 const Gallery = () => {
   const [imageuri, setImageuri] = useState('');
@@ -24,19 +24,10 @@ const Gallery = () => {
   const [showImages, setShowImages] = useState([]);
 
   useEffect(() => {
-    // let items = Array.apply(null, Array(120)).map((v, i) => {
-    //   return {
-    //     id: i,
-    //     src: 'https://unsplash.it/400/400?image=' + (i + 1),
-    //   };
-    // });
-    // setDataSource(items);
     showAllImages();
   }, []);
 
   const showModalFunction = (visible, imageURL) => {
-    //handler to handle the click on image of Grid
-    //and close button on modal
     setImageuri(imageURL);
     setModalVisibleStatus(visible);
   };
@@ -49,34 +40,6 @@ const Gallery = () => {
       setShowImages(res);
     });
   };
-
-  //   return (
-  //     <SafeAreaView style={styles.container}>
-  //       <View>
-  //         {
-  //           <ScrollView>
-  //             {showImages.map(data => {
-  //               let paths = {
-  //                 link: 'file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/03-08-21-1618510.jpg',
-  //               };
-
-  //               return (
-  //                 <Text key={data.name}>
-  //                   <FastImage
-  //                     source={{
-  //                       uri: `file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/${data.name}`,
-  //                     }}
-  //                     style={{width: 150, height: 150}}
-  //                   />
-  //                 </Text>
-  //               );
-  //             })}
-  //           </ScrollView>
-  //         }
-  //       </View>
-  //     </SafeAreaView>
-  //   );
-  // };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -173,11 +136,6 @@ const styles = StyleSheet.create({
     width: 125,
   },
   imageStyle: {
-    // height: 120,
-    // width: '100%',
-    // flex: 1,
-    // justifyContent: 'space-between',
-    // alignItems: 'center',
     width: (Dimensions.get('window').width - (30 + 2 * 3)) / 3,
     height: (Dimensions.get('window').width - (30 + 2 * 3)) / 3,
     justifyContent: 'center',

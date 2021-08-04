@@ -403,6 +403,15 @@ async function checkAndroidPermission() {
 }
 
 ///https://medium.com/geekculture/capturing-images-with-react-native-203e24f93eb9
+///https://github.com/react-native-camera/react-native-camera/pull/2505
+///https://www.instamobile.io/react-native-tutorials/capturing-photos-and-videos-with-the-camera-in-react-native/
+///https://github.com/react-native-camera/react-native-camera/issues/2178
+///https://www.gitmemory.com/issue/react-native-community/react-native-camera/2178/543152220
+
+///https://blog.synced.to/RN-Pinch-To-Zoom/
+/// https://www.gitmemory.com/issue/react-native-community/react-native-camera/1282/543697432
+///https://school.shoutem.com/lectures/react-native-camera-app-live-preview-saturation-brightness-filters/
+
 const moment = require('moment');
 
 export default class CameraComponent extends React.Component {
@@ -416,23 +425,36 @@ export default class CameraComponent extends React.Component {
           style={styles.preview}
           type={RNCamera.Constants.Type.back}
           playSoundOnCapture={true}
+          ////adddd
+          autoFocus={'off'}
+          skipProcessing={true}
+          type={'back'}
+          flashMode={'off'}
+          zoom={0}
+          whiteBalance={'auto'}
+          ratio={'16:9'}
+          camera1ScanMode="boost"
+          useCamera2Api={true} // add this line
+          //captureQuality={Camera.constants.CaptureQuality["720p"]}
+          ////adddd
+
           flashMode={RNCamera.Constants.FlashMode.off}></RNCamera>
 
         <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center'}}>
           {/*<TouchableOpacity
             onPress={this.takePicture.bind(this)}
             style={styles.capture}>
-            <Text style={{fontSize: 14}}>SNAP</Text>
+            <Text style={{fontSize: 14}}>SNAP</Text><Icon name="expand-more" size={30} />
          </TouchableOpacity>*/}
 
           <TouchableOpacity style={styles.capture} onPress={() => this.back()}>
-            <Icon name="expand-more" size={30} />
+            <Icon name="close-circle" style={{fontSize: 40, color: 'white'}} />
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.captureIcon}
             onPress={this.takePicture.bind(this)}>
-            <Icon name="camera-alt" size={33} style={{color: 'white'}} />
+            <Icon name="camera-alt" size={35} style={{color: 'white'}} />
           </TouchableOpacity>
         </View>
       </View>
@@ -462,14 +484,14 @@ export default class CameraComponent extends React.Component {
       console.log(error);
     }
   };
-
+  ///https://stackoverflow.com/questions/54285002/how-can-i-make-my-react-native-camera-capture-fast
   takePicture = async folder => {
     if (this.camera) {
       const options = {quality: 0.5, base64: true}; //, skipProcessing: true};
       const data = await this.camera.takePictureAsync(options);
 
       console.log('data', data.base64);
-      //checkAndroidPermission();
+      //checkAndroidPermission();this.camera.takePictureAsync({skipProcessing: true})
 
       // const path = `${RNFetchBlob.fs.dirs.CacheDir}/test.png`;
       //console.log('path', path);
