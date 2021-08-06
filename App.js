@@ -51,6 +51,15 @@ import CameraComponent from './src/components/CameraComponent';
 import RNCamera from './src/components/RNCamera';
 import ImageGallery from './src/components/ImageGallery';
 import Gallery from './src/components/Gallery';
+import AddPostScreen from './src/components/AddPostScreen';
+import Categories from './src/components/Categories';
+import Try from './src/components/Try';
+import Tryout from './src/components/Tryout';
+import Tryout3 from './src/components/Tryout3';
+import ImagePress from './src/components/ImagePress';
+import CheckB from './src/components/CheckB';
+import MapDirectionnew from './src/components/MapDirectionnew';
+import MapPline from './src/components/MapPline';
 
 const Stack = createStackNavigator();
 
@@ -83,6 +92,15 @@ const App = () => {
         <Stack.Screen name="RNCamera" component={RNCamera} />
         <Stack.Screen name="ImgGallery" component={ImageGallery} />
         <Stack.Screen name="Gallery" component={Gallery} />
+        <Stack.Screen name="UploadImages" component={AddPostScreen} />
+        <Stack.Screen name="Categories" component={Categories} />
+        <Stack.Screen name="Try" component={Try} />
+        <Stack.Screen name="Tryout" component={Tryout} />
+        <Stack.Screen name="Tryout3" component={Tryout3} />
+        <Stack.Screen name="ImagePress" component={ImagePress} />
+        <Stack.Screen name="CheckB" component={CheckB} />
+        <Stack.Screen name="MapDirectNew" component={MapDirectionnew} />
+        <Stack.Screen name="MapPline" component={MapPline} />
       </Stack.Navigator>
     </NavigationContainer>
   );

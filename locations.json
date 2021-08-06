@@ -1,0 +1,31 @@
+[
+  {
+    "name": "Jie Jie Beach Hotel",
+    "address": "135 Nam Kỳ Khởi Nghĩa, Phường Bến Thành, Quận 1, Hồ Chí Minh 700000",
+    "coords": {
+      "latitude": 6.7034646,
+      "longitude": 79.9061982
+    },
+    "image_url": "https://media.glassdoor.com/l/de/cd/ae/b6/the-face-shop.jpg"
+  },
+
+
+  {
+    "name": "CRYSTAL+INDOOR+BADMINTON+COURT",
+    "address": "Turtle Lake, phường 6, District 3, Ho Chi Minh City",
+    "coords": {
+      "latitude": 6.7035216,
+      "longitude": 79.9066727
+    },
+    "image_url": "http://dreamercosmetic.com/uploads/source/chekd101/trangdiem/bomyphamchanel5moncaocap11600x450.jpg"
+  },
+  {
+    "name": "Karoke Lounge By Jetwing",
+    "address": "208 Nguyễn Hữu Cảnh, Phường 22, Bình Thạnh, Hồ Chí Minh 700000",
+    "coords": {
+      "latitude": 6.7037545,
+      "longitude": 79.9063659
+    },
+    "image_url": "https://www.vinpearl.com/landmark81/wp-content/uploads/sites/39/2018/09/VP-Luxury-Landmark-81-22-bot.jpg"
+  }
+]

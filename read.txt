@@ -1,3 +1,8 @@
+delete file
+https://stackoverflow.com/questions/41352198/react-native-file-handling-delete-image
+
+
+
 How to access files and folders using react-native-fs library
 https://stackoverflow.com/questions/47197227/how-to-access-files-and-folders-using-react-native-fs-library
 https://stackoverflow.com/questions/61054777/display-local-image-in-react-native
