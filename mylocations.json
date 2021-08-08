@@ -1,7 +1,7 @@
 [
   {
     "name": "Jie Jie Beach Hotel",
-    "address": "135 Nam Kỳ Khởi Nghĩa, Phường Bến Thành, Quận 1, Hồ Chí Minh 700000",
+    "address": "Jie Jie Beach Hotel",
     "coords": {
       "latitude": 6.7034646,
       "longitude": 79.9061982
@@ -12,7 +12,7 @@
 
   {
     "name": "CRYSTAL+INDOOR+BADMINTON+COURT",
-    "address": "Turtle Lake, phường 6, District 3, Ho Chi Minh City",
+    "address": "CRYSTAL+INDOOR+BADMINTON+COURT",
     "coords": {
       "latitude": 6.7035216,
       "longitude": 79.9066727
@@ -21,7 +21,7 @@
   },
   {
     "name": "Karoke Lounge By Jetwing",
-    "address": "208 Nguyễn Hữu Cảnh, Phường 22, Bình Thạnh, Hồ Chí Minh 700000",
+    "address": "Karoke Lounge By Jetwing",
     "coords": {
       "latitude": 6.7037545,
       "longitude": 79.9063659

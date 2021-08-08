@@ -60,6 +60,9 @@ import ImagePress from './src/components/ImagePress';
 import CheckB from './src/components/CheckB';
 import MapDirectionnew from './src/components/MapDirectionnew';
 import MapPline from './src/components/MapPline';
+import MapDistance from './src/components/MapDistance';
+import AnimateMap from './src/components/AnimateMap';
+import Glocation from './src/components/Glocation';
 
 const Stack = createStackNavigator();
 
@@ -101,6 +104,9 @@ const App = () => {
         <Stack.Screen name="CheckB" component={CheckB} />
         <Stack.Screen name="MapDirectNew" component={MapDirectionnew} />
         <Stack.Screen name="MapPline" component={MapPline} />
+        <Stack.Screen name="MapDistance" component={MapDistance} />
+        <Stack.Screen name="AnimMap" component={AnimateMap} />
+        <Stack.Screen name="Geolocation" component={Glocation} />
       </Stack.Navigator>
     </NavigationContainer>
   );

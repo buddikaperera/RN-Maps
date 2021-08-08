@@ -53,6 +53,16 @@ const EmptyScreen = ({navigation}) => {
           <TouchableOpacity onPress={() => navigation.navigate('MapDirectNew')}>
             <Text style={styles.txtColor2}>Map Directions New</Text>
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('MapDistance')}>
+            <Text style={styles.txtColor2}>MapDistance SL</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('AnimMap')}>
+            <Text style={styles.txtColor2}>AnimMap</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Geolocation')}>
+            <Text style={styles.txtColor3}>Geolocation</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity onPress={() => navigation.navigate('CameraScreen')}>
             <Text style={styles.txtColor}>CameraScreen</Text>
           </TouchableOpacity>
@@ -131,6 +141,10 @@ const styles = StyleSheet.create({
   },
   txtColor2: {
     color: 'red',
+    fontSize: 20,
+  },
+  txtColor3: {
+    color: 'blue',
     fontSize: 20,
   },
 });
