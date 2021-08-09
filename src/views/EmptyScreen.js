@@ -59,10 +59,17 @@ const EmptyScreen = ({navigation}) => {
           <TouchableOpacity onPress={() => navigation.navigate('AnimMap')}>
             <Text style={styles.txtColor2}>AnimMap</Text>
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('GioCircule')}>
+            <Text style={styles.txtColor4}>GioCircule</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('SelectionView')}>
+            <Text style={styles.txtColor4}>SelectionView</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity onPress={() => navigation.navigate('Geolocation')}>
             <Text style={styles.txtColor3}>Geolocation</Text>
           </TouchableOpacity>
-
           <TouchableOpacity onPress={() => navigation.navigate('CameraScreen')}>
             <Text style={styles.txtColor}>CameraScreen</Text>
           </TouchableOpacity>
@@ -145,6 +152,10 @@ const styles = StyleSheet.create({
   },
   txtColor3: {
     color: 'blue',
+    fontSize: 20,
+  },
+  txtColor4: {
+    color: 'green',
     fontSize: 20,
   },
 });

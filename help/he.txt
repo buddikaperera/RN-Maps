@@ -1,0 +1,94 @@
+  checkBox(index) {
+    let checkedCopy = this.state.checked;
+
+    console.log('checkedCopy', checkedCopy);
+    checkedCopy[index] = !checkedCopy[index];
+    this.setState({
+      checked: checkedCopy,
+    });
+  }
+this.checkBox(index)
+
+ checked: [false, false, false, false, false, false, false, false],
+
+
+
+
+
+
+
+ this.state = {
+      checkSelected: [],
+    };
+
+ toggleCheckBox = (id, isCheck) => {
+    let {checkSelected} = this.state;
+    if (isCheck) {
+      checkSelected.push(id);
+    } else {
+      // remove element
+      var index = checkSelected.indexOf(id);
+      if (index > -1) {
+        checkSelected.splice(index, 1);
+      }
+    }
+
+    this.setState({checkSelected});
+
+    alert(this.state.checkSelected); // logging
+  };
+
+ clicked={(id, isCheck) => this.toggleCheckBox(id, isCheck)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, {useState} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+
+const Tryout3 = () => {
+  const defaultList = [
+    {name: 'ItemOne'},
+    {name: 'ItemTwo'},
+    {name: 'ItemThree'},
+  ];
+
+  const [list, updateList] = useState(defaultList);
+
+  const handleRemoveItem = e => {
+    const name = e.target.getAttribute('name');
+    updateList(list.filter(item => item.name !== name));
+  };
+
+  return (
+    <View>
+      {list.map(item => {
+        return (
+          <View>
+            <span name={item.name} onClick={handleRemoveItem}>
+              x
+            </span>
+            <span>{item.name}</span>
+          </View>
+        );
+      })}
+    </View>
+  );
+};

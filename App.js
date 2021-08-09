@@ -63,6 +63,8 @@ import MapPline from './src/components/MapPline';
 import MapDistance from './src/components/MapDistance';
 import AnimateMap from './src/components/AnimateMap';
 import Glocation from './src/components/Glocation';
+import GioCircule from './src/components/GioCircule';
+import SelectionView from './src/components/SelectionView';
 
 const Stack = createStackNavigator();
 
@@ -107,6 +109,8 @@ const App = () => {
         <Stack.Screen name="MapDistance" component={MapDistance} />
         <Stack.Screen name="AnimMap" component={AnimateMap} />
         <Stack.Screen name="Geolocation" component={Glocation} />
+        <Stack.Screen name="GioCircule" component={GioCircule} />
+        <Stack.Screen name="SelectionView" component={SelectionView} />
       </Stack.Navigator>
     </NavigationContainer>
   );

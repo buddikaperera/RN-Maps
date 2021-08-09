@@ -120,6 +120,7 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
+  Alert,
   View,
   TouchableOpacity,
   FlatList,
@@ -129,15 +130,29 @@ import {
   Dimensions,
 } from 'react-native';
 import * as RNFS from 'react-native-fs';
+
+import Feather from 'react-native-vector-icons/Feather';
 //import FastImage
 import FastImage from 'react-native-fast-image';
 import * as Animatable from 'react-native-animatable';
+import {color} from 'react-native-reanimated';
 
 const AddPostScreen = () => {
   const [imageuri, setImageuri] = useState('');
   const [modalVisibleStatus, setModalVisibleStatus] = useState(false);
   const [dataSource, setDataSource] = useState([]);
   const [showImages, setShowImages] = useState([]);
+  const [state, setState] = useState(0);
+  const [itemPressed, setitemPressed] = useState([]);
+  const [isItemSelected, setisItemSelected] = useState([]);
+  const [list, setList] = React.useState([]);
+  //const [checkedArray, setcheckedArray] = useState([]);
+
+  //function handleRemove(id) {
+  //const newList = list.filter(item => item.id !== id);
+
+  //setList(newList);
+  //}
 
   useEffect(() => {
     showAllImages();
@@ -152,83 +167,126 @@ const AddPostScreen = () => {
     RNFS.readDir(
       `${RNFS.ExternalStorageDirectoryPath}/Android/data/com.taxiapp/files/IMAGES/JB001/`,
     ).then(res => {
-      // console.log(res);
-      setShowImages(res);
+      console.log(res);
+      //setShowImages(res);
+      //showImages.push(id);
+      let arr = res.map((item, index) => {
+        item.isSelected = false;
+
+        return {...item};
+      });
+      setShowImages(arr);
+
+      console.log('arr data =>', arr);
     });
+  };
+
+  const checkedList = () => {
+    let arr = showImages.map((item, index) => {
+      item.isSelected = false;
+
+      return {...item};
+    });
+    setShowImages(arr);
+
+    console.log('arr data =>', arr);
+  };
+
+  const pressMe = () => {
+    console.log('pressMe');
+    setState(1);
+    console.log('setState', state);
+  };
+
+  const typeSelected = (value, index) => {
+    Alert.alert(value);
+    console.log('value', value, 'index', index);
+    setitemPressed(value);
+    //this.setState({
+    //itemPressed: value,
+    //}
+    //);
+  };
+
+  const selectionHandler = (ind, item) => {
+    let arr = showImages.map((img, index) => {
+      if (ind == index) {
+        img.isSelected = !img.isSelected; //true;
+      }
+      return {...img};
+    });
+
+    console.log('selectionHandler-->', arr);
+    setShowImages(arr);
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      {modalVisibleStatus ? (
-        <Modal
-          transparent={false}
-          animationType={'fade'}
-          visible={modalVisibleStatus}
-          onRequestClose={() => {
-            showModalFunction(!modalVisibleStatus, '');
-          }}>
-          <View style={styles.modelStyle}>
-            <FastImage
-              style={styles.fullImageStyle}
-              source={{uri: imageuri}}
-              resizeMode={FastImage.resizeMode.contain}
-            />
-            <TouchableOpacity
-              activeOpacity={0.5}
-              style={styles.closeButtonStyle}
-              onPress={() => {
-                showModalFunction(!modalVisibleStatus, '');
+      <View style={styles.container}>
+        <FlatList
+          data={showImages}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index}) => (
+            <View
+              style={{
+                width: (Dimensions.get('window').width - 30) / 3,
+                height: (Dimensions.get('window').width - 30) / 3,
+                maxWidth: Dimensions.get('window').width / 2,
+                //borderColor: state == 0 ? 'green' : 'red',
+
+                // borderWidth: 2,
+                justifyContent: 'center',
               }}>
-              <FastImage
-                source={{
-                  uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/close.png',
-                }}
-                style={{width: 35, height: 35}}
-              />
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      ) : (
-        <View style={styles.container}>
-          <FlatList
-            data={showImages}
-            renderItem={({item}) => (
-              <View
-                style={{
-                  width: (Dimensions.get('window').width - 32) / 3,
-                  height: (Dimensions.get('window').width - 32) / 3,
-                  maxWidth: Dimensions.get('window').width / 2,
-                  justifyContent: 'center',
-                }}>
-                <TouchableOpacity
-                  key={item.name}
-                  style={{flex: 1}}
-                  onPress={() => {
-                    showModalFunction(
-                      true,
-                      `file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/${item.name}`,
-                    );
-                  }}>
-                  <FastImage
-                    style={styles.imageStyle}
-                    source={{
-                      uri: `file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/${item.name}`,
-                    }}
-                  />
-                </TouchableOpacity>
-              </View>
-            )}
-            //Setting the number of column
-            numColumns={3}
-            contentContainerStyle={{margin: 2}}
-            style={{borderWidth: 0}}
-            horizontal={false}
-            keyExtractor={item => item.findIndex}
-            //keyExtractor={(item, index) => index.toString()}
-          />
-        </View>
-      )}
-      <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity
+                activeOpacity={1.0}
+                activeOpacity={(1, 250)}
+                key={item.name}
+                style={{flex: 1}}
+                //onPress={() => pressMe()}
+                //onPress={() => typeSelected(item.name, index)}
+                onPress={() => selectionHandler(index, item.name)}>
+                <FastImage
+                  style={[
+                    styles.imageStyle,
+                    {
+                      borderWidth: 4,
+                      //borderColor: state == 0 ? 'green' : 'red',
+                      borderColor: item.isSelected ? '#32CD32' : 'black',
+                    },
+                  ]}
+                  source={{
+                    uri: `file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/${item.name}`,
+                  }}
+                />
+
+                <View style={{position: 'absolute', top: 10, right: 10}}>
+                  <Text>
+                    {item.isSelected ? (
+                      <Feather name="check-square" color="#36c537" size={20} />
+                    ) : (
+                      <Feather
+                        style={{fontSize: 20, height: 20}}
+                        name="x-square"
+                        color="rgba(249, 53, 15, 0.9);"
+                        size={20}
+                        shadow={0}
+                      />
+                    )}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
+          //Setting the number of column
+          numColumns={3}
+          contentContainerStyle={{margin: 2}}
+          style={{borderWidth: 0}}
+          horizontal={false}
+          //keyExtractor={item => item.findIndex}
+        />
+      </View>
+
+      {/*<View style={{flexDirection: 'row'}}>-
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <Text>asdasdasd</Text>
           <Text>asdasdasd</Text>
@@ -240,11 +298,13 @@ const AddPostScreen = () => {
           <Text>asdasdasd</Text>
           <Text>asdasdasd</Text>
           <Text>asdasdasd</Text>
-        </ScrollView>
-      </View>
+                  </ScrollView>
+      </View>*/}
     </SafeAreaView>
   );
 };
+///https://avaxgfx.com/video_tutorials/109261-udemy-react-native-and-javascript-your-development-guide.html
+
 export default AddPostScreen;
 
 const styles = StyleSheet.create({
