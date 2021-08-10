@@ -111,7 +111,7 @@
 //     </View>
 //   );
 // };
-
+//const URL = `${process.env.REACT_APP_API_URL}`;
 // export default AddPostScreen;
 
 import React, {useState, useEffect} from 'react';
@@ -136,6 +136,16 @@ import Feather from 'react-native-vector-icons/Feather';
 import FastImage from 'react-native-fast-image';
 import * as Animatable from 'react-native-animatable';
 import {color} from 'react-native-reanimated';
+import {Platform} from 'react-native';
+
+export const baseUrl =
+  Platform.OS === 'android'
+    ? 'http://192.168.8.100:3000/'
+    : 'http://localhost:8081/';
+
+//const URL = `${process.env.REACT_APP_API_URL}`;
+
+//import {REACT_APP_API_URL} from 'react-native-dotenv';
 
 const AddPostScreen = () => {
   const [imageuri, setImageuri] = useState('');
@@ -163,6 +173,8 @@ const AddPostScreen = () => {
     setModalVisibleStatus(visible);
   };
 
+  //file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/blah.jpeg
+
   const showAllImages = () => {
     RNFS.readDir(
       `${RNFS.ExternalStorageDirectoryPath}/Android/data/com.taxiapp/files/IMAGES/JB001/`,
@@ -176,6 +188,7 @@ const AddPostScreen = () => {
         return {...item};
       });
       setShowImages(arr);
+      //console.log('arr URL =>', REACT_APP_API_URL);
 
       console.log('arr data =>', arr);
     });
@@ -218,6 +231,61 @@ const AddPostScreen = () => {
 
     console.log('selectionHandler-->', arr);
     setShowImages(arr);
+  };
+
+  const handleUpload = image => {
+    const data = new FormData();
+    data.append('file', image);
+    data.append('upload_preset', 'employeeApp');
+    data.append('cloud_name', 'buddhikap2016');
+
+    try {
+      fetch('https://api.cloudinary.com/v1_1/buddhikap2016/image/upload', {
+        method: 'post',
+        body: data,
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          // setPicture(data.url);
+          // setModal(false);
+        });
+    } catch {
+      then(error => console.error(error));
+    }
+  };
+
+  const submitData = () => {
+    console.log('selected showImages ', showImages);
+
+    let newResults = showImages.filter(img => {
+      return img.isSelected != false;
+    });
+    // setUsers(newResults);
+    console.log('Upload images', newResults);
+
+    let uploadFiles = newResults.map((file, index) => {
+      console.log('Upload Files', file.name);
+      console.log('Upload path', file.path);
+      console.log('Upload type', file.name.split('.')[1]);
+
+      let newFile = {
+        uri: 'file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/10-08-21-1106666.jpg', //'https://res.cloudinary.com/buddhikap2016/image/upload/v1628570359/uwqhc0iawji7uyzfxlfi.jpg',
+        type: 'image/jpeg', ///file.name.split('.')[1],
+        name: file.name.split('.')[0],
+      };
+      handleUpload(newFile); ////adb reverse tcp:3000 tcp:3000
+    });
+
+    {
+      /*let newFile = {
+      uri: data.uri,
+      type: `test/${data.uri.split('.')[1]}`,
+      name: `test/${data.uri.split('.')[1]}`,
+    };
+    handleUpload(newFile);
+*/
+    }
   };
 
   return (
@@ -285,6 +353,11 @@ const AddPostScreen = () => {
           //keyExtractor={item => item.findIndex}
         />
       </View>
+      <TouchableOpacity style={styles.addContainer}>
+        <Text style={styles.inputStyle} onPress={() => submitData()}>
+          Upload
+        </Text>
+      </TouchableOpacity>
 
       {/*<View style={{flexDirection: 'row'}}>-
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -304,7 +377,7 @@ const AddPostScreen = () => {
   );
 };
 ///https://avaxgfx.com/video_tutorials/109261-udemy-react-native-and-javascript-your-development-guide.html
-
+///https://feathericons.com/
 export default AddPostScreen;
 
 const styles = StyleSheet.create({
@@ -360,5 +433,8 @@ const styles = StyleSheet.create({
     top: 50,
     right: 20,
     position: 'absolute',
+  },
+  inputStyle: {
+    margin: 15,
   },
 });
