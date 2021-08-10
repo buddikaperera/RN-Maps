@@ -132,6 +132,7 @@ import {
 import * as RNFS from 'react-native-fs';
 
 import Feather from 'react-native-vector-icons/Feather';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 //import FastImage
 import FastImage from 'react-native-fast-image';
 import * as Animatable from 'react-native-animatable';
@@ -184,6 +185,7 @@ const AddPostScreen = () => {
       //showImages.push(id);
       let arr = res.map((item, index) => {
         item.isSelected = false;
+        item.isUploaded = false;
 
         return {...item};
       });
@@ -197,6 +199,7 @@ const AddPostScreen = () => {
   const checkedList = () => {
     let arr = showImages.map((item, index) => {
       item.isSelected = false;
+      item.isUploaded = false;
 
       return {...item};
     });
@@ -249,6 +252,20 @@ const AddPostScreen = () => {
           console.log(data);
           // setPicture(data.url);
           // setModal(false);
+          // showImages;
+
+          let arrImg = showImages.map((item, index) => {
+            console.log('item.name=>', item.name.split('.')[0]);
+            console.log('image=>', image.name);
+
+            if (item.name.split('.')[0] == image.name) {
+              item.isUploaded = true;
+            }
+            return {...item};
+          });
+          setShowImages(arrImg);
+
+          console.log('uploaded arr arrImg =>', arrImg);
         });
     } catch {
       then(error => console.error(error));
@@ -320,7 +337,11 @@ const AddPostScreen = () => {
                     {
                       borderWidth: 4,
                       //borderColor: state == 0 ? 'green' : 'red',
-                      borderColor: item.isSelected ? '#32CD32' : 'black',
+                      borderColor: !item.isUploaded
+                        ? item.isSelected
+                          ? '#32CD32'
+                          : 'black'
+                        : '#006600',
                     },
                   ]}
                   source={{
@@ -330,17 +351,32 @@ const AddPostScreen = () => {
 
                 <View style={{position: 'absolute', top: 10, right: 10}}>
                   <Text>
-                    {item.isSelected ? (
-                      <Feather name="check-square" color="#36c537" size={20} />
+                    {!item.isUploaded ? (
+                      item.isSelected ? (
+                        <MaterialIcons
+                          name="check-circle"
+                          color="#32CD32"
+                          size={18}
+                          shadow={0}
+                        />
+                      ) : (
+                        <Feather
+                          style={{fontSize: 20, height: 20}}
+                          name="x-circle"
+                          color="red"
+                          size={18}
+                          shadow={0}
+                        />
+                      )
                     ) : (
-                      <Feather
-                        style={{fontSize: 20, height: 20}}
-                        name="x-square"
-                        color="rgba(249, 53, 15, 0.9);"
-                        size={20}
-                        shadow={0}
+                      <MaterialIcons
+                        name="verified"
+                        color="#006600"
+                        size={18}
+                        shadow={2}
                       />
                     )}
+                    <Text> </Text>
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -379,12 +415,15 @@ const AddPostScreen = () => {
 };
 ///https://avaxgfx.com/video_tutorials/109261-udemy-react-native-and-javascript-your-development-guide.html
 ///https://feathericons.com/
+////https://www.npmjs.com/package/react-native-endless-background-service-without-notification
+
 export default AddPostScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
+    paddingHorizontal: 5,
   },
   titleStyle: {
     padding: 16,
