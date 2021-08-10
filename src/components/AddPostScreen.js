@@ -270,7 +270,8 @@ const AddPostScreen = () => {
       console.log('Upload type', file.name.split('.')[1]);
 
       let newFile = {
-        uri: 'file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/10-08-21-1106666.jpg', //'https://res.cloudinary.com/buddhikap2016/image/upload/v1628570359/uwqhc0iawji7uyzfxlfi.jpg',
+        uri: `file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/${file.name}`,
+        //'file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/10-08-21-1106666.jpg', //'https://res.cloudinary.com/buddhikap2016/image/upload/v1628570359/uwqhc0iawji7uyzfxlfi.jpg',
         type: 'image/jpeg', ///file.name.split('.')[1],
         name: file.name.split('.')[0],
       };
