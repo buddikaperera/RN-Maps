@@ -553,7 +553,6 @@ const UploadScreen = () => {
                   progress={uploadProgress}
                   height={12}
                   color="#32CD32"
-                  animationConfig="{ bounciness: 0 }"
                   width={320}
                 />
               </Text>
