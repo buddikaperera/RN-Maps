@@ -131,6 +131,7 @@ const UploadScreen = () => {
     let arr = showImages.map((img, index) => {
       if (ind == index) {
         img.isSelected = !img.isSelected; //true;
+        img.isProgress = 0;
       }
       return {...img};
     });
@@ -345,6 +346,9 @@ const UploadScreen = () => {
 
   const upload = newFile => {
     console.log('selected newFile ', newFile);
+    console.log('selected count ', newFile.count);
+
+    let count = newFile.count;
 
     const data = new FormData();
     data.append('file', newFile);
@@ -355,10 +359,14 @@ const UploadScreen = () => {
       onUploadProgress: progressEvent => {
         setUploadProgress(0);
         const percentCompleted = Math.round(
-          (progressEvent.loaded * 100) / progressEvent.total,
+          (progressEvent.loaded * (count + count + 1) * 100) /
+            progressEvent.total,
         );
         // setUploadProgress(percentCompleted);
-        console.log('selected percentCompleted ', percentCompleted);
+        console.log(
+          'selected percentCompleted ' + newFile.count,
+          percentCompleted,
+        );
 
         // for (var i = 0; i < 5; i++) {
         //   (function () {
@@ -426,6 +434,7 @@ const UploadScreen = () => {
         //'file:///storage/emulated/0/Android/data/com.taxiapp/files/IMAGES/JB001/10-08-21-1106666.jpg', //'https://res.cloudinary.com/buddhikap2016/image/upload/v1628570359/uwqhc0iawji7uyzfxlfi.jpg',
         type: 'image/jpeg', ///file.name.split('.')[1],
         name: file.name.split('.')[0],
+        count: index,
       };
       upload(newFile); ////adb reverse tcp:3000 tcp:3000
     });
