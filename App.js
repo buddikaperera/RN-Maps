@@ -65,6 +65,10 @@ import AnimateMap from './src/components/AnimateMap';
 import Glocation from './src/components/Glocation';
 import GioCircule from './src/components/GioCircule';
 import SelectionView from './src/components/SelectionView';
+import ImageCroper from './src/components/ImageCroper';
+import PercentageCircle from './src/components/UI/PercentageCircle';
+import PopUp from './src/components/UI/PopUp';
+import UploadScreen from './src/components/UploadScreen';
 
 const Stack = createStackNavigator();
 
@@ -111,6 +115,10 @@ const App = () => {
         <Stack.Screen name="Geolocation" component={Glocation} />
         <Stack.Screen name="GioCircule" component={GioCircule} />
         <Stack.Screen name="SelectionView" component={SelectionView} />
+        <Stack.Screen name="ImageCroper" component={ImageCroper} />
+        <Stack.Screen name="PercentageCircle" component={PercentageCircle} />
+        <Stack.Screen name="PopUp" component={PopUp} />
+        <Stack.Screen name="UploadScreen" component={UploadScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

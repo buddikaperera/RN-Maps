@@ -141,7 +141,7 @@ import {Platform} from 'react-native';
 
 export const baseUrl =
   Platform.OS === 'android'
-    ? 'http://192.168.8.100:3000/'
+    ? 'http://172.22.102.95:3000/'
     : 'http://localhost:8081/';
 
 //const URL = `${process.env.REACT_APP_API_URL}`;

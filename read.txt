@@ -1,3 +1,8 @@
+// if (!state.isLoggedIn) {
+//   return <Redirect to="/login" />;
+// }
+
+
 https://www.youtube.com/watch?v=hM7sNpgG1KQ
 https://www.youtube.com/watch?v=Zk2JK4tj1Fs&t=155s
 

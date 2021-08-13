@@ -66,6 +66,19 @@ const EmptyScreen = ({navigation}) => {
             onPress={() => navigation.navigate('SelectionView')}>
             <Text style={styles.txtColor4}>SelectionView</Text>
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('ImageCroper')}>
+            <Text style={styles.txtColor4}>Image Croper</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('PercentageCircle')}>
+            <Text style={styles.txtColor5}>PercentageCircle</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('PopUp')}>
+            <Text style={styles.txtColor5}>PopUp</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('UploadScreen')}>
+            <Text style={styles.txtColor5}>Upload Bar</Text>
+          </TouchableOpacity>
 
           <TouchableOpacity onPress={() => navigation.navigate('Geolocation')}>
             <Text style={styles.txtColor3}>Geolocation</Text>
@@ -156,6 +169,10 @@ const styles = StyleSheet.create({
   },
   txtColor4: {
     color: 'green',
+    fontSize: 20,
+  },
+  txtColor5: {
+    color: 'brown',
     fontSize: 20,
   },
 });
