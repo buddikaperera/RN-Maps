@@ -76,8 +76,17 @@ const EmptyScreen = ({navigation}) => {
           <TouchableOpacity onPress={() => navigation.navigate('PopUp')}>
             <Text style={styles.txtColor5}>PopUp</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('UploadScreen')}>
-            <Text style={styles.txtColor5}>Upload Bar</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('MyUi')}>
+            <Text style={styles.txtColor5}>UI</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('MyLogin')}>
+            <Text style={styles.txtColor5}>MyLogin</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
+            <Text style={styles.txtColor5}>Dashboard</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Members')}>
+            <Text style={styles.txtColor5}>Members</Text>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => navigation.navigate('Geolocation')}>

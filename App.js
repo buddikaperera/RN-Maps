@@ -69,6 +69,11 @@ import ImageCroper from './src/components/ImageCroper';
 import PercentageCircle from './src/components/UI/PercentageCircle';
 import PopUp from './src/components/UI/PopUp';
 import UploadScreen from './src/components/UploadScreen';
+import MyUi from './src/components/UI/MyUi';
+import Login from './src/components/UI/Login';
+import Dashboard from './src/components/UI/Dashboard';
+import Members from './src/components/UI/Members';
+import Chat from './src/components/UI/Chat';
 
 const Stack = createStackNavigator();
 
@@ -119,6 +124,11 @@ const App = () => {
         <Stack.Screen name="PercentageCircle" component={PercentageCircle} />
         <Stack.Screen name="PopUp" component={PopUp} />
         <Stack.Screen name="UploadScreen" component={UploadScreen} />
+        <Stack.Screen name="MyUi" component={MyUi} />
+        <Stack.Screen name="MyLogin" component={Login} />
+        <Stack.Screen name="Dashboard" component={Dashboard} />
+        <Stack.Screen name="Members" component={Members} />
+        <Stack.Screen name="Chat" component={Chat} />
       </Stack.Navigator>
     </NavigationContainer>
   );
