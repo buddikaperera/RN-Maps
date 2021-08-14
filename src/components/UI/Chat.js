@@ -17,6 +17,7 @@ import chatsState from '../../constants/chatsState';
 
 const Chat = ({route}) => {
   const selectedMember = route.params.itemId;
+
   console.log('selectedMember' + selectedMember);
 
   const {messages} = chatsState;
@@ -28,7 +29,7 @@ const Chat = ({route}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.chatWrapper}>
-        <View style={styles.messagesSection} key={selectedMember}>
+        <View style={styles.messagesSection} key={11}>
           {messages.map(message => (
             <View
               key={message.id}

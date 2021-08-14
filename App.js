@@ -74,6 +74,7 @@ import Login from './src/components/UI/Login';
 import Dashboard from './src/components/UI/Dashboard';
 import Members from './src/components/UI/Members';
 import Chat from './src/components/UI/Chat';
+import Profile from './src/components/UI/Profile';
 
 const Stack = createStackNavigator();
 
@@ -129,6 +130,7 @@ const App = () => {
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="Members" component={Members} />
         <Stack.Screen name="Chat" component={Chat} />
+        <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
   );

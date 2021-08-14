@@ -88,6 +88,9 @@ const EmptyScreen = ({navigation}) => {
           <TouchableOpacity onPress={() => navigation.navigate('Members')}>
             <Text style={styles.txtColor5}>Members</Text>
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+            <Text style={styles.txtColor5}>Profile</Text>
+          </TouchableOpacity>
 
           <TouchableOpacity onPress={() => navigation.navigate('Geolocation')}>
             <Text style={styles.txtColor3}>Geolocation</Text>
