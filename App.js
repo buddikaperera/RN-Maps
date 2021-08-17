@@ -75,6 +75,12 @@ import Dashboard from './src/components/UI/Dashboard';
 import Members from './src/components/UI/Members';
 import Chat from './src/components/UI/Chat';
 import Profile from './src/components/UI/Profile';
+import Projects from './src/components/UI/Projects';
+import {Project} from './src/components/UI/Project';
+import BeautifulStateView from './src/components/UI/BeautifulStateView';
+import SlideM from './src/components/UI/SlideM';
+import Graph from './src/components/UI/Graph';
+import MailContainer from './src/components/UI/MailContainer';
 
 const Stack = createStackNavigator();
 
@@ -131,6 +137,16 @@ const App = () => {
         <Stack.Screen name="Members" component={Members} />
         <Stack.Screen name="Chat" component={Chat} />
         <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Projects" component={Projects} />
+        <Stack.Screen name="Project" component={Project} />
+        <Stack.Screen name="SlideM" component={SlideM} />
+        <Stack.Screen name="Graph" component={Graph} />
+        <Stack.Screen name="MailContainer" component={MailContainer} />
+
+        <Stack.Screen
+          name="BeautifulStateView"
+          component={BeautifulStateView}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

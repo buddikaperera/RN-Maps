@@ -64,7 +64,7 @@ const EmptyScreen = ({navigation}) => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate('SelectionView')}>
-            <Text style={styles.txtColor4}>SelectionView</Text>
+            <Text style={styles.txtColor6}>SelectionView</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('ImageCroper')}>
             <Text style={styles.txtColor4}>Image Croper</Text>
@@ -90,6 +90,23 @@ const EmptyScreen = ({navigation}) => {
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
             <Text style={styles.txtColor5}>Profile</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Projects')}>
+            <Text style={styles.txtColor5}>Projects</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('BeautifulStateView')}>
+            <Text style={styles.txtColor6}>BeautifulStateView</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('SlideM')}>
+            <Text style={styles.txtColor6}>SlideM</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Graph')}>
+            <Text style={styles.txtColor6}>Graph</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('MailContainer')}>
+            <Text style={styles.txtColor6}>Image Crop working</Text>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => navigation.navigate('Geolocation')}>
@@ -185,6 +202,10 @@ const styles = StyleSheet.create({
   },
   txtColor5: {
     color: 'brown',
+    fontSize: 20,
+  },
+  txtColor6: {
+    color: 'orange',
     fontSize: 20,
   },
 });
