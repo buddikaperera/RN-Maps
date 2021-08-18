@@ -14,8 +14,9 @@ const MailContainer = () => {
     <View>
       <Text>MailContainer</Text>
       <ImageEdit
-        width={400}
+        width={3400}
         height={300}
+        showSaveButtons={true}
         scaled={true} //To enable pre scaling and positioning
         image={{
           uri: 'https://source.unsplash.com/daily',
@@ -33,8 +34,8 @@ const MailContainer = () => {
         showSaveButtons={true}
         image={{
           uri: 'https://source.unsplash.com/daily',
-          width: 1000,
-          height: 500,
+          width: 1200,
+          height: 700,
         }}
         onSave={info => console.log(info)}
       />

@@ -69,6 +69,8 @@ import ImageCroper from './src/components/ImageCroper';
 import PercentageCircle from './src/components/UI/PercentageCircle';
 import PopUp from './src/components/UI/PopUp';
 import UploadScreen from './src/components/UploadScreen';
+import UploadScreenWithCrop from './src/components/UploadScreenWithCrop';
+
 import MyUi from './src/components/UI/MyUi';
 import Login from './src/components/UI/Login';
 import Dashboard from './src/components/UI/Dashboard';
@@ -81,6 +83,7 @@ import BeautifulStateView from './src/components/UI/BeautifulStateView';
 import SlideM from './src/components/UI/SlideM';
 import Graph from './src/components/UI/Graph';
 import MailContainer from './src/components/UI/MailContainer';
+import MyModal from './src/components/MyModal';
 
 const Stack = createStackNavigator();
 
@@ -142,11 +145,15 @@ const App = () => {
         <Stack.Screen name="SlideM" component={SlideM} />
         <Stack.Screen name="Graph" component={Graph} />
         <Stack.Screen name="MailContainer" component={MailContainer} />
-
+        <Stack.Screen
+          name="UploadScreenWithCrop"
+          component={UploadScreenWithCrop}
+        />
         <Stack.Screen
           name="BeautifulStateView"
           component={BeautifulStateView}
         />
+        <Stack.Screen name="MyModal" component={MyModal} />
       </Stack.Navigator>
     </NavigationContainer>
   );

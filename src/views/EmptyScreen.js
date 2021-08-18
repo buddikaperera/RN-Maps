@@ -108,7 +108,6 @@ const EmptyScreen = ({navigation}) => {
             onPress={() => navigation.navigate('MailContainer')}>
             <Text style={styles.txtColor6}>Image Crop working</Text>
           </TouchableOpacity>
-
           <TouchableOpacity onPress={() => navigation.navigate('Geolocation')}>
             <Text style={styles.txtColor3}>Geolocation</Text>
           </TouchableOpacity>
@@ -151,6 +150,17 @@ const EmptyScreen = ({navigation}) => {
           <TouchableOpacity onPress={() => navigation.navigate('UploadImages')}>
             <Text style={styles.txtColor}>Upload Images</Text>
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('UploadScreen')}>
+            <Text style={styles.txtColor}>Upload Images with Progress</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('UploadScreenWithCrop')}>
+            <Text style={styles.txtColor}>UploadScreenWithCrop</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('MyModal')}>
+            <Text style={styles.txtColor}>MyModal</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity onPress={() => navigation.navigate('Categories')}>
             <Text style={styles.txtColor}>Categories</Text>
           </TouchableOpacity>
