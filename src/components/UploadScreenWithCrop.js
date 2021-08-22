@@ -317,15 +317,32 @@ const UploadScreenWithCrop = () => {
                 console.log('before crash');
                 console.log('ImagePicker is', ImagePicker);
                 ImagePicker.openCropper({
-                  width: 300,
-                  height: 400,
+                  width: 500, //900,
+                  height: 800, //1200,
                   cropping: true,
                   path: imageuri,
-                }).then(image => {
-                  console.log('image crop', image);
-                  saveImage(image.path, 'JB001');
-                });
-                console.log('after crash');
+                  //cropperCircleOverlay: circular,
+
+                  sortOrder: 'none',
+                  compressImageMaxWidth: 900,
+                  compressImageMaxHeight: 900,
+                  compressImageQuality: 1,
+                  //compressVideoPreset: 'MediumQu ality',
+                  includeExif: true,
+                  cropperStatusBarColor: 'white',
+                  cropperToolbarColor: 'white',
+                  cropperActiveWidgetColor: 'white',
+                  cropperToolbarWidgetColor: '#3498DB',
+                })
+                  .then(image => {
+                    // console.log('received image', image);
+                    console.log('image crop', image);
+                    saveImage(image.path, 'JB001');
+                  })
+                  .catch(e => {
+                    console.log(e);
+                    Alert.alert(e.message ? e.message : e);
+                  });
               }}>
               <Text style={styles.paragraph}>Touch me</Text>
             </View>

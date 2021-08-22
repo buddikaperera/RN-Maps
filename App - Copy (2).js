@@ -18,23 +18,6 @@ import {
 } from './src/views/Screens'; //3
 
 const AuthStack = createStackNavigator();
-
-const AuthStackScreen = () => {
-  return (
-    <AuthStack.Navigator>
-      <AuthStack.Screen
-        name="SignIn"
-        component={SignIn}
-        options={{title: 'Sign In'}}
-      />
-      <AuthStack.Screen
-        name="CreateAccount"
-        component={CreateAccount}
-        options={{title: 'Create Account'}}
-      />
-    </AuthStack.Navigator>
-  );
-};
 const Tabs = createBottomTabNavigator();
 
 const HomeStack = createStackNavigator();
@@ -55,7 +38,10 @@ const HomeStackScreen = () => (
 );
 
 const ProfieStackScreen = () => (
-  <ProfileStack.Navigator headerMode="none">
+  <ProfileStack.Navigator
+
+  //headerMode="none"
+  >
     <ProfileStack.Screen name="Profile" component={Profile} />
   </ProfileStack.Navigator>
 );
@@ -78,41 +64,6 @@ const TabScreen = () => {
 };
 
 const Drawer = createDrawerNavigator();
-
-const DrawerScreen = () => {
-  return (
-    <Drawer.Navigator initialRouteName="Profile">
-      <Drawer.Screen name="Home" component={TabScreen} />
-      <Drawer.Screen name="Profile" component={ProfieStackScreen} />
-    </Drawer.Navigator>
-  );
-};
-
-const RootStack = createStackNavigator();
-
-const RootStackScreen = ({userToken}) => {
-  return (
-    <RootStack.Navigator headerMode="none">
-      {userToken ? (
-        <RootStack.Screen
-          name="App"
-          component={DrawerScreen}
-          options={{
-            animationEnabled: false,
-          }}
-        />
-      ) : (
-        <RootStack.Screen
-          name="Auth"
-          component={AuthStackScreen}
-          options={{
-            animationEnabled: false,
-          }}
-        />
-      )}
-    </RootStack.Navigator>
-  );
-};
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -146,7 +97,25 @@ const App = () => {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <RootStackScreen userToken={userToken} />
+        {userToken ? (
+          <Drawer.Navigator initialRouteName="Profile">
+            <Drawer.Screen name="Home" component={TabScreen} />
+            <Drawer.Screen name="Profile" component={ProfieStackScreen} />
+          </Drawer.Navigator>
+        ) : (
+          <AuthStack.Navigator>
+            <AuthStack.Screen
+              name="SignIn"
+              component={SignIn}
+              options={{title: 'Sign In'}}
+            />
+            <AuthStack.Screen
+              name="CreateAccount"
+              component={CreateAccount}
+              options={{title: 'Create Account'}}
+            />
+          </AuthStack.Navigator>
+        )}
       </NavigationContainer>
     </AuthContext.Provider>
   );

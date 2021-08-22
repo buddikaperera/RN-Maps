@@ -160,7 +160,6 @@ const EmptyScreen = ({navigation}) => {
           <TouchableOpacity onPress={() => navigation.navigate('MyModal')}>
             <Text style={styles.txtColor}>MyModal</Text>
           </TouchableOpacity>
-
           <TouchableOpacity onPress={() => navigation.navigate('Categories')}>
             <Text style={styles.txtColor}>Categories</Text>
           </TouchableOpacity>
@@ -178,6 +177,12 @@ const EmptyScreen = ({navigation}) => {
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('CheckB')}>
             <Text style={styles.txtColor}>CheckB</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('ClickImage')}>
+            <Text style={styles.txtColor}>ClickImage</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Level')}>
+            <Text style={styles.txtColor}>Level</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
